@@ -5,6 +5,7 @@ import listOfStudentApp.exceptions.AgeLimit;
 import listOfStudentApp.operations.*;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,7 +31,13 @@ public final class Service {
                     ShowingStudents.showStudents();
                     break;
                 case "2":
-                    SortingByField.sortByField(students);
+                    try {
+                        Comparator<Student> comparator = SortingByField.sortByField(students);
+                        Collections.sort(students, comparator);
+                        ShowingStudents.showStudents();
+                    }catch (IllegalArgumentException ex){
+                        System.err.println(ex.getMessage());
+                    }
                     break;
                 case "3":
                     try {

@@ -6,56 +6,39 @@ import listOfStudentApp.comparing.*;
 import listOfStudentApp.enums.SortFields;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class SortingByField {
 
-    public static void sortByField(List<Student> students) {//done
+    public static Comparator<Student> sortByField(List<Student> students) {//done
         System.out.println("Choose field for sorting (id, name, surname, age, score, birthdate, admissionDate)");
         System.out.println("Type sorting field:");
-        try {
-            SortFields sf = SortFields.valueOf(Service.scan.next().toUpperCase());
 
-            switch (sf) {
-                case SURNAME:
-                    ComparingBySurName surName = new ComparingBySurName();
-                    Collections.sort(students, surName);
-                    System.out.println("List was sorted by surname");
-                    ShowingStudents.showStudents();
-                    break;
-                case AGE:
-                    ComparingByAge age = new ComparingByAge();
-                    Collections.sort(students, age);
-                    System.out.println("List was sorted by age");
-                    ShowingStudents.showStudents();
-                    break;
-                case SCORE:
-                    ComparingByScore score = new ComparingByScore();
-                    Collections.sort(students, score);
-                    System.out.println("List was sorted by score");
-                    ShowingStudents.showStudents();
-                    break;
-                case ID:
-                    ComparingByID id = new ComparingByID();
-                    Collections.sort(students, id);
-                    System.out.println("List was sorted by ID");
-                    ShowingStudents.showStudents();
-                    break;
-                case BIRTHDATE:
-                    ComparingByBirthDate birthDate = new ComparingByBirthDate();
-                    Collections.sort(students, birthDate);
-                    System.out.println("List was sorted by birthday");
-                    ShowingStudents.showStudents();
-                case ADMISSIONDATE:
-                    ComparingAdmissionDate admissionDate = new ComparingAdmissionDate();
-                    Collections.sort(students, admissionDate);
-                    System.out.println("List was sorted by admission date");
-                    ShowingStudents.showStudents();
-                default:
-                    throw new IllegalArgumentException("Invalid sort field!");
-            }
-        } catch (IllegalArgumentException exception) {
-            System.err.println(exception.getMessage());
+        SortFields sf = SortFields.valueOf(Service.scan.next().toUpperCase());
+
+        switch (sf) {
+            case SURNAME:
+                System.out.println("List was sorted by surname");
+                return new ComparingBySurName();
+            case AGE:
+                System.out.println("List was sorted by age");
+                return new ComparingByAge();
+            case SCORE:
+                System.out.println("List was sorted by score");
+                return new ComparingByScore();
+            case ID:
+                System.out.println("List was sorted by ID");
+                return new ComparingByID();
+            case BIRTHDATE:
+                System.out.println("List was sorted by birthdate");
+                return new ComparingByBirthDate();
+            case ADMISSIONDATE:
+                System.out.println("List was sorted by admission date");
+                return new ComparingAdmissionDate();
+            default:
+                throw new IllegalArgumentException("Invalid sort field!");
+
         }
     }
 }
