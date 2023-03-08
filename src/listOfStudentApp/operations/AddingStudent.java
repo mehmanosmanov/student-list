@@ -2,6 +2,7 @@ package listOfStudentApp.operations;
 
 import listOfStudentApp.Service;
 import listOfStudentApp.Student;
+import listOfStudentApp.StudentInFile;
 import listOfStudentApp.exceptions.AgeLimit;
 
 import java.time.LocalDate;
@@ -27,14 +28,16 @@ public class AddingStudent {
         System.out.println("Admission date:");
         LocalDate admissionDate = LocalDate.of(Service.scan.nextInt(), Service.scan.nextInt(), Service.scan.nextInt());
 
-        Service.students.add(new Student.StudentBuilder()
+        Student newStudent=new Student.StudentBuilder()
                 .setName(name)
                 .setSurname(surName)
                 .setAge(age)
                 .setScore(score)
                 .setBirthDate(birthdate)
                 .setAdmissionDate(admissionDate)
-                .build());
+                .build();
+        Service.students.add(newStudent);
+//        StudentInFile.table(newStudent);
 
         System.out.println("Student is added successfully!");
         Service.operation();

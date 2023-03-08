@@ -1,7 +1,9 @@
 package listOfStudentApp.defaultStudens;
 
 import listOfStudentApp.Student;
+import listOfStudentApp.StudentInFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +13,8 @@ public class DefaultListOfStudens {
 
     private static List<Student> list=new ArrayList<>();
 
-    public static List<Student> studens() {
+
+    public static List<Student> studens() throws IOException {
         list.add(new Student.StudentBuilder()
                 .setAge(26)
                 .setName("Mehman")

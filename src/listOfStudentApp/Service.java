@@ -4,30 +4,40 @@ import listOfStudentApp.defaultStudens.DefaultListOfStudens;
 import listOfStudentApp.exceptions.AgeLimit;
 import listOfStudentApp.operations.*;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
 public final class Service {
-    public static List<Student> students = DefaultListOfStudens.studens();
+    public static List<Student> students;
+
+    static {
+        try {
+            students = DefaultListOfStudens.studens();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static Scanner scan = new Scanner(System.in);
 
     public static void operation() {
-        System.out.println("\n...Please enter operation...");
-        System.out.println("Press 1: Show all students," +
-                "\nPress 2: Sort and show students, " +
-                "\nPress 3: Add student, " +
-                "\nPress 4: Show student by id," +
-                "\nPress 5: Delete student by id," +
-                "\nPress 6: Update student by id, " +
-                "\nPress 7: Exit..\n");
+
         while (true) {
+            System.out.println("\n...Please enter operation...");
+            System.out.println("Press 1: Show all students" +
+                    "\nPress 2: Sort and show students" +
+                    "\nPress 3: Add student" +
+                    "\nPress 4: Show student by id" +
+                    "\nPress 5: Delete student by id" +
+                    "\nPress 6: Update student by id" +
+                    "\nPress 7: Exit..\n");
+            Collections.sort(students);
             String a = scan.next();
             switch (a) {
                 case "1":
-                    Collections.sort(students);
                     ShowingStudents.showStudents();
                     break;
                 case "2":
@@ -35,7 +45,7 @@ public final class Service {
                         Comparator<Student> comparator = SortingByField.sortByField(students);
                         Collections.sort(students, comparator);
                         ShowingStudents.showStudents();
-                    }catch (IllegalArgumentException ex){
+                    } catch (IllegalArgumentException ex) {
                         System.err.println(ex.getMessage());
                     }
                     break;
@@ -56,6 +66,12 @@ public final class Service {
                     UpdatingStudentInfo.updateStudentInfo();
                     break;
                 case "7":
+                    try {
+                        StudentInFile.table(Service.students);
+                        System.out.println("Student list saved on file");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                     AppExit.exit();
                 default:
                     throw new IllegalArgumentException("Press correct operation!");
