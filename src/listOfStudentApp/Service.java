@@ -26,7 +26,7 @@ public final class Service {
     public static void operation() {
 
         while (true) {
-            System.out.println("\n...Please enter operation...");
+            System.out.println("\n*** Please enter operation ***");
             System.out.println("Press 1: Show all students" +
                     "\nPress 2: Sort and show students" +
                     "\nPress 3: Add student" +
