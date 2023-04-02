@@ -43,7 +43,7 @@ public final class Service {
                 case "2":
                     try {
                         Comparator<Student> comparator = SortingByField.sortByField(students);
-                        Collections.sort(students, comparator);
+                        students.sort(comparator);
                         ShowingStudents.showStudents();
                     } catch (IllegalArgumentException ex) {
                         System.err.println(ex.getMessage());
