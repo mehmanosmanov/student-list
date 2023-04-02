@@ -5,11 +5,10 @@ import listOfStudentApp.Service;
 import listOfStudentApp.Student;
 
 import java.util.Comparator;
-import java.util.List;
 
 public class SortingByField {
 
-    public static Comparator<Student> sortByField(List<Student> students) {//done
+    public static Comparator<Student> sortByField() {//done
         System.out.println("Choose field for sorting (id, surname, age, score, birthdate, admissionDate)");
         System.out.println("Type sorting field:");
 
@@ -30,13 +29,13 @@ public class SortingByField {
                 return (Student o1, Student o2) -> (o1.getAge() - o2.getAge() == 0 ? (int) (o1.getScore() - o2.getScore()) : o1.getAge() - o2.getAge());
             case SCORE:
                 System.out.println("List was sorted by score");
-                return Comparator.comparing(Student::getScore);
+                return Comparator.comparing(Student::getScore).reversed();
             case BIRTHDATE:
                 System.out.println("List was sorted by birthdate");
-                return Comparator.comparing(Student::getBirthDate);
+                return Comparator.comparing(Student::getBirthDate).reversed();
             case ADMISSIONDATE:
                 System.out.println("List was sorted by admission date");
-                return Comparator.comparing(Student::getAdmissionDate);
+                return Comparator.comparing(Student::getAdmissionDate).reversed();
             default:
                 throw new IllegalArgumentException("Invalid sort field!");
         }
