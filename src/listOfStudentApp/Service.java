@@ -42,7 +42,7 @@ public final class Service {
                     break;
                 case "2":
                     try {
-                        Comparator<Student> comparator = SortingByField.sortByField(students);
+                        Comparator<Student> comparator = SortingByField.sortByField();
                         students.sort(comparator);
                         ShowingStudents.showStudents();
                     } catch (IllegalArgumentException ex) {
