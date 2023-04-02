@@ -26,7 +26,7 @@ public class SortingByField {
                 };
             case AGE:
                 System.out.println("List was sorted by age");
-                return (Student o1, Student o2) -> (o1.getAge() - o2.getAge() == 0 ? (int) (o1.getScore() - o2.getScore()) : o1.getAge() - o2.getAge());
+                return Comparator.comparing(Student::getAge).reversed();
             case SCORE:
                 System.out.println("List was sorted by score");
                 return Comparator.comparing(Student::getScore).reversed();
